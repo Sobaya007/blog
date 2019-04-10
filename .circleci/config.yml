@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cibuilds/hugo:latest
+    working_directory: ~/hugo
+    steps:
+      - run:
+          name: Update enviroment
+          command: apk update && apk add git
+      - run:
+          name: Hugo version
+          command: echo "$(hugo version)"
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+              - "ac:71:a9:13:64:97:80:c6:89:7a:09:dc:cb:ae:de:ef"
+      - deploy:
+          name: Deploy to GitHub Pages
+          command: ./.circleci/deploy.sh

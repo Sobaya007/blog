@@ -1,7 +1,7 @@
 ---
-title: "ブログ始めました"
+title: "Test title"
 date: 2019-04-10T16:27:25+09:00
-draft: true
+draft: false
 thumbnail: "images/sobaya.jpeg"
 
 ---
