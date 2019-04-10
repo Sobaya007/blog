@@ -14,7 +14,7 @@ git config --global user.name "sobaya"
 
 echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
-git clone -q $CIRCLE_REPOSITORY_URL $DEPLOY_DIR
+git clone -q "git@github.com:Sobaya007/Sobaya007.github.io.git" $DEPLOY_DIR
 
 # rsyncでhugoで生成したHTMLをコピー
 cd $DEPLOY_DIR
