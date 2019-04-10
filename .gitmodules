@@ -1,0 +1,18 @@
+[submodule "themes/cupper"]
+	path = themes/cupper
+	url = git@github.com:zwbetz-gh/cupper-hugo-theme.git
+[submodule "themes/hurock"]
+	path = themes/hurock
+	url = git@github.com:TiTi/hurock.git
+[submodule "polymer"]
+	path = polymer
+	url = https://github.com/pdevty/polymer
+[submodule "themes/polymer"]
+	path = themes/polymer
+	url = https://github.com/pdevty/polymer
+[submodule "hugo-statnmap-theme"]
+	path = hugo-statnmap-theme
+	url = git@github.com:statnmap/hugo-statnmap-theme.git
+[submodule "themes/hugo-statnmap-theme"]
+	path = themes/hugo-statnmap-theme
+	url = git@github.com:statnmap/hugo-statnmap-theme.git
