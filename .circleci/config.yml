@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cibuilds/hugo:latest
+      - image: cibuilds/hugo:0.54.0 
     working_directory: ~/hugo
     steps:
       - run:
@@ -12,6 +12,9 @@ jobs:
           name: Hugo version
           command: echo "$(hugo version)"
       - checkout
+      - run: |
+          git submodule sync
+          git submodule update --init
       - add_ssh_keys:
           fingerprints:
               - "ac:71:a9:13:64:97:80:c6:89:7a:09:dc:cb:ae:de:ef"

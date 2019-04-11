@@ -5,6 +5,10 @@ set -e
 
 DEPLOY_DIR=deploy
 
+ls
+ls content/post
+
+hugo version
 hugo
 
 # gitの諸々の設定
@@ -18,7 +22,6 @@ git clone -q "git@github.com:Sobaya007/Sobaya007.github.io.git" $DEPLOY_DIR
 
 # rsyncでhugoで生成したHTMLをコピー
 cd $DEPLOY_DIR
-ls ..
 rsync -arv --delete ../public/* .
 
 git add -f .
