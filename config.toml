@@ -15,6 +15,7 @@ theme = "hugo-statnmap-theme"
     site_description = ""
     copyright  = "Powered by [Hugo](//gohugo.io). Theme by [statnmap](https://github.com/statnmap/hugo-statnmap-theme)."
     avatar = "images/sobaya.jpeg"
+    themeVariant = "mime"
     
     # Set to true to disable code folding
     disable_codefolding = true
@@ -56,7 +57,7 @@ theme = "hugo-statnmap-theme"
     # 1 - Create a favicon folder in "static".
     # 2 - Create a favicon with 250*250px and 300*300px, named
     # favicon-250.png and favicon-300.png
-    loadFavicon          = false
+    loadFavicon          = true
 
     # Number of words of post summary
     summary_length = 200

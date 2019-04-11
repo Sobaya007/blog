@@ -2,8 +2,9 @@
 title: "D言語+Shared Library+Down castで型情報が死ぬ問題"
 date: 2019-04-10T16:27:25+09:00
 thumbnail: "images/dman.png"
-tags: ["D言語"]
-
+banner: "images/dman.png"
+categories: ["D言語"]
+tags: ["D言語", "バグ"]
 ---
 
 最近気づいた現象。(バグ？)
