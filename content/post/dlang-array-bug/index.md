@@ -12,26 +12,28 @@ tags: ["D言語", "バグ"]
 このバグは結構前に発見していて、issueも投げた...気がするんですが、一向に直りませんね。かなり頻繁に出くわすんですが、他の環境だと違うのでしょうか？
 
 今回のバグはこんなかんじで発生します。
-```c++
-interface I {
-    int x();
-}
 
-class C : I {
-    int x() { return 10; }
-}
+>```d
+>interface I {
+>    int x();
+>}
+>
+>class C : I {
+>    int x() { return 10; }
+>}
+>
+>void main(){
+>
+>    I[] iList;
+>    C[] cList = [new C];
+>
+>    iList ~= cList;
+>
+>    import std.stdio : writeln;
+>    writeln(iList[0].x); //私の環境では6と出た。
+>}
+>```
 
-void main(){
-
-    I[] iList;
-    C[] cList = [new C];
-
-    iList ~= cList;
-
-    import std.stdio : writeln;
-    writeln(iList[0].x); //私の環境では6と出た。
-}
-```
 つまり、
 
 - あるインターフェース`I`とそれを継承したクラス`C`がある。

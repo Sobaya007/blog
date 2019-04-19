@@ -30,10 +30,10 @@ theme = "hugo-statnmap-theme"
     
     # options for highlight.js (version, additional languages, and theme)
     disable_highlight = false
-    highlightjsVersion = "9.11.0"
-    highlightjsCDN = "//cdn.bootcss.com"
-    highlightjsLang = ["r", "yaml"]
-    highlightjsTheme = "github"
+    highlightjsVersion = "9.15.6"
+    highlightjsCDN = "https://cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml", "d"]
+    highlightjsTheme = "vs2015"
     
     # How to cite blog article
     disable_citation = true

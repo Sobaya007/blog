@@ -20,12 +20,12 @@ tags: ["D言語", "バグ"]
 具体的には以下のような状態。
 
 >type.d
->```c
+>```d
 >interface I { }
 >```
 >
 >dll1.d
->```c
+>```d
 >import type;
 >class C : I {}
 >I create() { return new C; }
@@ -33,7 +33,7 @@ tags: ["D言語", "バグ"]
 >```
 >
 >dll2.d
->```c
+>```d
 >import type;
 >import dll1;
 >
@@ -46,7 +46,7 @@ tags: ["D言語", "バグ"]
 >```
 >
 >main.d
->```c
+>```d
 >import std.experimental.all;
 >import core.runtime;
 >import core.sys.posix.dlfcn : dlsym, dlerror;
@@ -79,7 +79,7 @@ tags: ["D言語", "バグ"]
 
 
 >dll1.d
->```c
+>```d
 >import std.variant;
 >class C {}
 >Variant create() { return Variant(new C); }
@@ -87,7 +87,7 @@ tags: ["D言語", "バグ"]
 >```
 >
 >dll2.d
->```c
+>```d
 >import std.variant;
 >import dll1;
 >
@@ -100,7 +100,7 @@ tags: ["D言語", "バグ"]
 >```
 >
 >main.d
->```c
+>```d
 >import std.experimental.all;
 >import core.runtime;
 >import core.sys.posix.dlfcn : dlsym, dlerror;
