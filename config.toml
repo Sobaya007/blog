@@ -32,7 +32,7 @@ theme = "hugo-statnmap-theme"
     disable_highlight = false
     highlightjsVersion = "9.15.6"
     highlightjsCDN = "https://cdnjs.cloudflare.com/ajax/libs"
-    highlightjsLang = ["r", "yaml", "d"]
+    highlightjsLang = ["r", "yaml", "d", "bash"]
     highlightjsTheme = "vs2015"
     
     # How to cite blog article
