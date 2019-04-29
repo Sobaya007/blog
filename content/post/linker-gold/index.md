@@ -132,6 +132,7 @@ Displaying notes found in: .note.gnu.gold-version
 どうも他の指定をしても全部goldが使われるっぽい。
 
 結論として、
+
 - dmdではlldは使えない
 - ldcではgoldしか使えない
 
