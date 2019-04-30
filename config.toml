@@ -1,6 +1,7 @@
 baseurl = "https://sobaya007.github.io/"
 title = "そばやのぶろぐ"
 # Define the number of posts per page
+disqusShortname = "sobaya007noblog"
 paginate = 10
 footnotereturnlinkcontents = "↩"
 theme = "hugo-statnmap-theme"
