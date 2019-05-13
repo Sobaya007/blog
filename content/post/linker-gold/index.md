@@ -3,6 +3,7 @@ title: "D言語でgoldを使ってリンクを高速化してみた"
 date: 2019-04-27T23:33:31+09:00
 thumbnail: "images/dmd.jpeg"
 banner: "images/dmd.jpeg"
+images: ["images/dmd.jpeg"]
 categories: ["D言語"]
 tags: ["D言語", "linker"]
 ---
