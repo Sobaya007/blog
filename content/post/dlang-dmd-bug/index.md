@@ -33,3 +33,15 @@ dmdが2.085.0になったとき、[エラーが起きた箇所の周辺コード
 ちなみに`A`のメンバーが浮動小数型だとバグりますが、整数型だと通ります。
 また、`B`のコンストラクタ引数の配列数を2以上にすると通ります。
 意味がわからん...
+
+---
+
+## 追記
+2019/5/25
+
+この記事についてツイートをしたところ
+<blockquote class="twitter-tweet" data-partner="tweetdeck"><p lang="ja" dir="ltr"><a href="https://t.co/5HGn31UQcD">https://t.co/5HGn31UQcD</a> これでなおるかもしれません、といっても最速で2.085.2リリースになってしまいますが。</p>&mdash; 私にICEが舞い降りた！ (@shitsyndrome) <a href="https://twitter.com/shitsyndrome/status/1117942300892487680?ref_src=twsrc%5Etfw">April 16, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+とのお知らせが。  
+実際にdmd2.086.0で動かしてみると、無事動きました！ありがとうございます！！  
+BugzillaとかでIssue立てるのは私なんかにはハードルがめちゃめちゃ高いのでTwitterで反応してこうして直してくださると本当にありがたいですね。
