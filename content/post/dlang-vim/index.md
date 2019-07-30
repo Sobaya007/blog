@@ -5,6 +5,8 @@ thumbnail: "images/vman.png"
 banner: "images/vman.png"
 categories: ["D言語", "vim"]
 tags: ["D言語", "vim", "language-server"]
+images: ["images/vman.png"]
+
 ---
 
 多分D言語erさんの多くはVSCodeで開発してるんじゃないかと思うんですが、私は敬虔なvim教徒なのでnvimで日夜D言語を書いております。
