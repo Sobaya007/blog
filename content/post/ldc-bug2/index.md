@@ -11,8 +11,75 @@ tags: ["D言語", "バグ"]
 またみつけてしまった。。。
 今度のやつはまた微妙で、**私が自分でビルドしたLDCでのみ**起きた現象なので、私が悪い可能性も多分にあります。
 
-一応起こったことをご紹介。
+# 作業環境
+- OS: Arch Linux
+- LLVM: 9.0.0
+- LDC: v1.19.0-beta2(hash = ad80f004aeede0b1582bf9831133c000fecfef07)
 
+# 起こったこと
+まず自前でLDCをビルドします。
+```bash
+> git clone --recursive git@github.com:ldc-developers/ldc.git
+> git checkout v1.19.0-beta2
+> git submodule update --recursive
+> mkdir build
+> cd build
+> cmake .. -G Ninja
+> ninja
+> sudo ninja install
+```
+できあがったLDCはこんなかんじ。
+```bash
+> ldc2 --version
+
+LDC - the LLVM D compiler (1.19.0-beta2):
+  based on DMD v2.089.0 and LLVM 9.0.0
+  built with LDC - the LLVM D compiler (1.19.0-beta2)
+  Default target: x86_64-pc-linux-gnu
+  Host CPU: haswell
+  http://dlang.org - http://wiki.dlang.org/LDC
+
+  Registered Targets:
+    aarch64    - AArch64 (little endian)
+    aarch64_32 - AArch64 (little endian ILP32)
+    aarch64_be - AArch64 (big endian)
+    amdgcn     - AMD GCN GPUs
+    arm        - ARM
+    arm64      - ARM64 (little endian)
+    arm64_32   - ARM64 (little endian ILP32)
+    armeb      - ARM (big endian)
+    avr        - Atmel AVR Microcontroller
+    bpf        - BPF (host endian)
+    bpfeb      - BPF (big endian)
+    bpfel      - BPF (little endian)
+    hexagon    - Hexagon
+    lanai      - Lanai
+    mips       - MIPS (32-bit big endian)
+    mips64     - MIPS (64-bit big endian)
+    mips64el   - MIPS (64-bit little endian)
+    mipsel     - MIPS (32-bit little endian)
+    msp430     - MSP430 [experimental]
+    nvptx      - NVIDIA PTX 32-bit
+    nvptx64    - NVIDIA PTX 64-bit
+    ppc32      - PowerPC 32
+    ppc64      - PowerPC 64
+    ppc64le    - PowerPC 64 LE
+    r600       - AMD GPUs HD2XXX-HD6XXX
+    riscv32    - 32-bit RISC-V
+    riscv64    - 64-bit RISC-V
+    sparc      - Sparc
+    sparcel    - Sparc LE
+    sparcv9    - Sparc V9
+    systemz    - SystemZ
+    thumb      - Thumb
+    thumbeb    - Thumb (big endian)
+    wasm32     - WebAssembly 32-bit
+    wasm64     - WebAssembly 64-bit
+    x86        - 32-bit X86: Pentium-Pro and above
+    x86-64     - 64-bit X86: EM64T and AMD64
+    xcore      - XCore
+```
+こうしてインストールされたLDCを用いて以下のソースコードをビルドします。
 ```d
 struct Q {
     auto func(uint[3] a, uint[3] b, uint c) {
@@ -25,8 +92,6 @@ void main() {
     q.func([1,1,1],[1,1,1],1);
 }
 ```
-これをビルドすると、
-
 ```bash
 ldc2: ../gen/abi-x86-64.cpp:305: void X86_64TargetABI::rewriteArgument(IrFuncTy&, IrFuncTyArg&, {anonymous}::RegCount&): Assertion `originalLType->isStructTy()' failed.
  #0 0x00007ff128105b7b llvm::sys::PrintStackTrace(llvm::raw_ostream&) (/usr/lib/libLLVM-9.so+0xb08b7b)
@@ -101,3 +166,6 @@ ldc2: ../gen/abi-x86-64.cpp:305: void X86_64TargetABI::rewriteArgument(IrFuncTy&
 で、なんでここに構造体以外が来ることになっていないのかは不明。
 実際いまは`uint[3]`が来ているのでこれでassertionが起きている。
 う〜〜〜ん？？？
+
+# 追記
+再現性がシビアみたいなので、環境をちゃんと記載しました。
