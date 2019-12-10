@@ -92,6 +92,9 @@ void main() {
     q.func([1,1,1],[1,1,1],1);
 }
 ```
+
+すると以下のようなエラーが出ます。
+
 ```bash
 ldc2: ../gen/abi-x86-64.cpp:305: void X86_64TargetABI::rewriteArgument(IrFuncTy&, IrFuncTyArg&, {anonymous}::RegCount&): Assertion `originalLType->isStructTy()' failed.
  #0 0x00007ff128105b7b llvm::sys::PrintStackTrace(llvm::raw_ostream&) (/usr/lib/libLLVM-9.so+0xb08b7b)
@@ -169,3 +172,8 @@ ldc2: ../gen/abi-x86-64.cpp:305: void X86_64TargetABI::rewriteArgument(IrFuncTy&
 
 # 追記
 再現性がシビアみたいなので、環境をちゃんと記載しました。
+
+# 追追記
+修正されました！  
+https://github.com/ldc-developers/ldc/commit/ff831b9394b8c12595b708902b0bec8a00b5d3a5  
+[kubo39](https://twitter.com/shitsyndrome)さんありがとうございます！！！！
