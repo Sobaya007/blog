@@ -9,6 +9,8 @@ tags: ["D言語", "バグ"]
 
 もはやこれはバグなのかすら私にはわからない...
 
+※追記: 全然違うコード張ってました。
+
 ## 環境
 - Windows10 64bit
 - DMD v2.089.1-dirty
@@ -33,7 +35,10 @@ import std;
 __gshared HINSTANCE g_hInst;
 
 export extern(C) void dllprint() { printf("hello dll world\n"); }
-export extern(C) int getThree() { return 3; }
+export extern(C) Variant getThree() { 
+    int i = 3;
+    return Variant(i);
+}
 
 extern (Windows)
 BOOL DllMain(HINSTANCE hInstance, ULONG ulReason, LPVOID pvReserved)
@@ -102,6 +107,19 @@ hello dll world
 
 object.Error@(0): Access Violation
 ----------------
+0x1000331A
+0x0019FD9C
+0x004023E6 in core.memory.__ModuleInfo
+0x004060FF in std.internal.windows.advapi32.__ModuleInfo
+0x00406079 in std.internal.windows.advapi32.__ModuleInfo
+0x00405F14 in rt.monitor_.__ModuleInfo
+0x0040454A in std.datetime.timezone.__ModuleInfo
+0x00402513 in std.concurrency.__ModuleInfo
+0x75746359 in BaseThreadInitThunk
+0x77AD7B74 in RtlGetAppContainerNamedObjectPath
+0x77AD7B44 in RtlGetAppContainerNamedObjectPath
+----------------
 ```
 
-と、このように**`int`を返す関数は死ぬ**。`void`関数は死なない。は？
+と、このように**`Variant`を返す関数は死ぬ**。`void`関数は死なない。
+ちなみに`Tuple`とか別の構造体だと死なない。
