@@ -10,6 +10,7 @@ tags: ["D言語", "バグ"]
 もはやこれはバグなのかすら私にはわからない...
 
 ※追記: 全然違うコード張ってました。
+※追追記: 直りしました。
 
 ## 環境
 - Windows10 64bit
@@ -123,3 +124,69 @@ object.Error@(0): Access Violation
 
 と、このように**`Variant`を返す関数は死ぬ**。`void`関数は死なない。
 ちなみに`Tuple`とか別の構造体だと死なない。
+
+## 解決編
+Twitterにぶん投げたところあっさり解決。
+[@mono_shoo](https://twitter.com/mono_shoo)さんありがとうございます！！！
+
+結局オチとしては「`extern(C)`も型に入れろ」ということだったようです。
+プラスのオモシロ話として、「`extern(C)`はcastの中に直接書けないので`alias`で分けてやるとよい」ということも教えていただきました。
+つまり結論はこういうことです。
+
+```d
+    ...
+
+    alias T = extern(C) Variant function();
+    auto func2 = cast(T)GetProcAddress(lib, "getThree");
+    enforce(func2);
+    func2();
+```
+
+これで動きます！！！
+
+
+
+
+...って思うじゃん？
+
+## そして新たなバグへ
+じゃあこれを`int`に戻せるかって話なんですけど、**無理なんですよね**。
+というかこれが一番最初に気づいたバグなんですけど、ここに至るまでにも様々な難所があったわけですね。
+つまりやりたいのはこうです。
+
+```d
+    ...
+
+    alias T = extern(C) Variant function();
+    auto func2 = cast(T)GetProcAddress(lib, "getThree");
+    enforce(func2);
+    auto v = func2();
+    int i = v.get!int;
+```
+
+これを実行するとどうなるでしょうか？
+こうなります。
+
+```bash
+> dmd -run test.d
+hello dll world
+
+std.variant.VariantException@std\variant.d(1715): Variant: attempting to use incompatible types int and int
+----------------
+0x004033B4 in std.socket.__ModuleInfo
+0x004023F9 in core.thread.__ModuleInfo
+0x00406693 in std.internal.windows.advapi32.__ModuleInfo
+0x0040660D in std.internal.windows.advapi32.__ModuleInfo
+0x004064A8 in std.internal.windows.advapi32.__ModuleInfo
+0x0040475E in std.regex.internal.kickstart.__ModuleInfo
+0x0040253B in std.concurrency.__ModuleInfo
+0x75746359 in BaseThreadInitThunk
+0x77AD7B74 in RtlGetAppContainerNamedObjectPath
+0x77AD7B44 in RtlGetAppContainerNamedObjectPath
+```
+
+`int`から`int`には変換できないらしいです。
+へぇ。
+いやまぁたぶんTypeInfoのPoolか何かがDLL側とこっち側で違うとかだと思うんですけどね。
+ちなみにLinuxでは今のところだいたい動いています。
+なんだかなぁ...
