@@ -152,3 +152,6 @@ weight = 2
 # Set the followings to true as part of your site SEO
 enableRobotsTXT = true
 canonifyURLs = true
+
+[markup.goldmark.renderer]
+  unsafe = true
